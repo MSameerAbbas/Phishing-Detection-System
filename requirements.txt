@@ -5,7 +5,8 @@ opencv-python-headless
 pytesseract
 pdf2image
 scipy
-# pillow
+google-generativeai
+pillow
 # imutils
 # pandas
 # easyocr
