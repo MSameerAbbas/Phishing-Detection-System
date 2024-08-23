@@ -1,14 +1,5 @@
 import google.generativeai as genai
 from PIL import Image
-from dotenv import load_dotenv
-
-
-# Load environment variables
-load_dotenv()
-
-# GOOGLE_API_KEY = os.getenv('GOOGLE_API_KEY')
-
-# Configure your API key
 
 
 def classify_text(text, uploaded_image, GOOGLE_API_KEY):
