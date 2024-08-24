@@ -103,6 +103,6 @@ def image_to_string(image: bytes,
     except RuntimeError:
         error = "RuntimeError: Tesseract timed out during text extraction."
     except Exception as e:
-        error = str(e)
+        error = e
 
     return (text, error)
