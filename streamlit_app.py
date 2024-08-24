@@ -85,7 +85,7 @@ def init_session_state_variables():
     if "prediction" not in st.session_state:
         st.session_state.prediction = None
     if "api" not in st.session_state:
-        st.session_state.api = None
+        st.session_state.api = ""
 
 
 # streamlit config
@@ -269,20 +269,23 @@ with col_upload_2:
             st.markdown("---")
             st.subheader("Run Models :running:")
             if st.button("Output"):
-                with st.spinner("Running Models..."):
-                    st.session_state.text, error = tesseract.image_to_string(
-                        image=st.session_state.image,
-                        language_short=language_short,
-                        config=custom_oem_psm_config,
-                        timeout=timeout,
-                    )
-                    st.session_state.prediction, error = classify_text(
-                        st.session_state.text,
-                        Image.fromarray(st.session_state.image),
-                        st.session_state.api,
-                    )
-                    if error:
-                        st.error(error)
+                if st.session_state.api is "":
+                    st.error("Please enter your Gemini API key.")
+                else:
+                    with st.spinner("Running Models..."):
+                        st.session_state.text, error = tesseract.image_to_string(
+                            image=st.session_state.image,
+                            language_short=language_short,
+                            config=custom_oem_psm_config,
+                            timeout=timeout,
+                        )
+                        st.session_state.prediction, error = classify_text(
+                            st.session_state.text,
+                            Image.fromarray(st.session_state.image),
+                            st.session_state.api,
+                        )
+                        if error:
+                            st.error(error)
 
 if st.session_state.uploaded_file is not None:
     st.markdown("---")
