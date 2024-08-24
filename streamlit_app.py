@@ -269,7 +269,7 @@ with col_upload_2:
             st.markdown("---")
             st.subheader("Run Models :running:")
             if st.button("Output"):
-                if st.session_state.api is "":
+                if st.session_state.api == "":
                     st.error("Please enter your Gemini API key.")
                 else:
                     with st.spinner("Running Models..."):
@@ -279,13 +279,16 @@ with col_upload_2:
                             config=custom_oem_psm_config,
                             timeout=timeout,
                         )
-                        st.session_state.prediction, error = classify_text(
-                            st.session_state.text,
-                            Image.fromarray(st.session_state.image),
-                            st.session_state.api,
-                        )
                         if error:
                             st.error(error)
+                        if st.session_state.text is not None:
+                            st.session_state.prediction, error = classify_text(
+                                st.session_state.text,
+                                Image.fromarray(st.session_state.image),
+                                st.session_state.api,
+                            )
+                            if error:
+                                st.error(error)
 
 if st.session_state.uploaded_file is not None:
     st.markdown("---")
