@@ -1,1 +1,1 @@
-Link: phishing-detect.streamlit.app
+Link: webwarn.streamlit.app
